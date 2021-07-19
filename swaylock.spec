@@ -1,0 +1,98 @@
+Summary:	Screen locker for Wayland
+Name:		swaylock
+Version:	1.5
+Release:	1
+License:	MIT
+Group:		Applications
+Source0:	https://github.com/swaywm/swaylock/releases/download/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	97f1b7ee5ea4cf4f7e8934585af9f29e
+Source1:	%{name}.pamd
+URL:		https://github.com/swaywm/swaylock
+BuildRequires:	bash-completion
+BuildRequires:	cairo-devel
+BuildRequires:	fish-devel
+BuildRequires:	gdk-pixbuf2-devel
+BuildRequires:	meson >= 0.48.0
+BuildRequires:	ninja
+BuildRequires:	pam-devel
+BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	scdoc
+BuildRequires:	wayland-devel
+BuildRequires:	wayland-protocols >= 1.14
+BuildRequires:	xorg-lib-libxkbcommon-devel
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%description
+swaylock is a screen locking utility for Wayland compositors. It is
+compatible with any Wayland compositor which implements the following
+Wayland protocols:
+
+- wlr-layer-shell
+- wlr-input-inhibitor
+- xdg-output
+- xdg-shell
+
+%package -n bash-completion-swaylock
+Summary:	Bash completion for swaylock
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	bash-completion >= 2.0
+BuildArch:	noarch
+
+%description -n bash-completion-swaylock
+Bash completion for swaylock.
+
+%package -n fish-completion-swaylock
+Summary:	fish-completion for swaylock
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	fish
+BuildArch:	noarch
+
+%description -n fish-completion-swaylock
+fish-completion for swaylock.
+
+%package -n zsh-completion-swaylock
+Summary:	ZSH completion for swaylock
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	zsh
+BuildArch:	noarch
+
+%description -n zsh-completion-swaylock
+ZSH completion for swaylock.
+
+%prep
+%setup -q
+
+%build
+%meson build
+%ninja_build -C build
+
+%install
+rm -rf $RPM_BUILD_ROOT
+%ninja_install -C build
+
+cp -p %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/%{name}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(644,root,root,755)
+%doc README.md
+%config(noreplace) %verify(not md5 mtime size) /etc/pam.d/%{name}
+%attr(755,root,root) %{_bindir}/swaylock
+%{_mandir}/man1/swaylock.1*
+
+%files -n bash-completion-swaylock
+%defattr(644,root,root,755)
+%{bash_compdir}/swaylock
+
+%files -n fish-completion-swaylock
+%defattr(644,root,root,755)
+%{fish_compdir}/swaylock.fish
+
+%files -n zsh-completion-swaylock
+%defattr(644,root,root,755)
+%{zsh_compdir}/_swaylock

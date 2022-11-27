@@ -1,11 +1,11 @@
 Summary:	Screen locker for Wayland
 Name:		swaylock
-Version:	1.6
+Version:	1.7
 Release:	1
 License:	MIT
 Group:		Applications
 Source0:	https://github.com/swaywm/swaylock/releases/download/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	a8c5cafe2e131458e7f04606c638850f
+# Source0-md5:	b78585070cd188c00a8ff46b20dfb898
 Source1:	%{name}.pamd
 URL:		https://github.com/swaywm/swaylock
 BuildRequires:	bash-completion
@@ -18,10 +18,10 @@ BuildRequires:	pam-devel
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	scdoc
-BuildRequires:	wayland-devel >= 1.15.0
+BuildRequires:	wayland-devel >= 1.20.0
 BuildRequires:	wayland-protocols >= 1.25
 BuildRequires:	xorg-lib-libxkbcommon-devel
-Requires:	wayland >= 1.15.0
+Requires:	wayland >= 1.20.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description

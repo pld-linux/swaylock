@@ -15,6 +15,7 @@ BuildRequires:	gdk-pixbuf2-devel
 BuildRequires:	meson >= 0.59.0
 BuildRequires:	ninja
 BuildRequires:	pam-devel
+BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	scdoc

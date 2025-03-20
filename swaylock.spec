@@ -17,7 +17,7 @@ BuildRequires:	ninja
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	scdoc
 BuildRequires:	wayland-devel >= 1.20.0
 BuildRequires:	wayland-protocols >= 1.25
@@ -69,12 +69,12 @@ ZSH completion for swaylock.
 %setup -q
 
 %build
-%meson build
-%ninja_build -C build
+%meson
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%ninja_install -C build
+%meson_install
 
 cp -p %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/%{name}
 

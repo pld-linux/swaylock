@@ -1,11 +1,11 @@
 Summary:	Screen locker for Wayland
 Name:		swaylock
-Version:	1.8.3
+Version:	1.8.4
 Release:	1
 License:	MIT
 Group:		Applications
 Source0:	https://github.com/swaywm/swaylock/releases/download/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	decec6b2ea2eceeaf832a441bc36e769
+# Source0-md5:	404954e713c83ee99e1b0e5491cb991a
 Source1:	%{name}.pamd
 URL:		https://github.com/swaywm/swaylock
 BuildRequires:	bash-completion
